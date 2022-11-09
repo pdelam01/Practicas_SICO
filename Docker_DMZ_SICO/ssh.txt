@@ -1,0 +1,34 @@
+GUION
+	En int1
+	ssh user1@10.5.1.20 -p 2222	//desde int1, a root no nos dejaría, y user1 no tien pass, vemos 2 fallos nos echa
+
+	En DMZ
+	adduser user2 pass user2
+	
+	En int1
+	ssh user2@0.5.1.20 -p 2222
+	
+En internal1 o pdelam01@kali
+ssh-keygen 
+ --- cat ~/.ssh/id_rsa.pub
+ --- previamente hacer google-authenticator
+ssh-copy-id -i ~/.ssh/id_rsa.pub -p 2222 user1@10.5.1.20
+
+En DMZ
+nano ~/.ssh/authorized_keys //CP-CV
+service ssh reload
+
+En internal1
+ssh -i /root/.ssh/id_rsa -p 2222 user2@10.5.1.20
+
+####################### Para 2FA
+DMZ
+	su - user1
+	google-authenticator
+	y,y,n,y
+
+internal1
+	ssh normal
+
+
+################################ fail2ban
