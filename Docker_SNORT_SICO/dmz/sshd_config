@@ -11,7 +11,7 @@
 
 Include /etc/ssh/sshd_config.d/*.conf
 
-Port 2222
+Port 50 #Para que no haya conflicto con cowrie, eliminamos el puerto 2222
 #AddressFamily any
 #ListenAddress 0.0.0.0
 #ListenAddress ::

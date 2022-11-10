@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 ENV TZ=Europe/Madrid
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt update
@@ -25,7 +25,23 @@ RUN a2enmod ssl
 RUN service apache2 restart
 # Fail2ban
 COPY ./jail.conf /etc/fail2ban/
+# Cowrie
+RUN apt-get update
+RUN apt-get install -y git python3-virtualenv libssl-dev libffi-dev build-essential libpython3-dev python3-minimal authbind virtualenv
+RUN apt update && apt install -y python3.10-venv
+RUN useradd -m -d /home/cowrie -s /bin/bash cowrie
+
+RUN su - cowrie && cd /home/cowrie && git clone http://github.com/cowrie/cowrie
+
+
+RUN cd /home/cowrie/cowrie && virtualenv --python=python3 cowrie-env && . cowrie-env/bin/activate && pip install --upgrade pip  && pip install --upgrade -r requirements.txt
+
+COPY ./cowrie.cfg.dist /home/cowrie/cowrie/etc/
+COPY ./userdb.txt /home/cowrie/cowrie/etc/
+
+#RUN chown -R cowrie:cowrie ~cowrie
 # Creamos usuario no root sin contraseña
+RUN service ssh stop
 RUN useradd -m -d /home/usuario -s /bin/bash user1
 RUN echo 'user1:user1' |chpasswd
 CMD ["./start.sh"]

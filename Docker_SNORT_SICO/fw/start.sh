@@ -5,4 +5,7 @@
 
 /iptables.sh
 
+#snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/rules/snort3-community.rules
+#snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/rules/snort3-community.rules -i eth1 -A full
+
 /usr/sbin/sshd -D
