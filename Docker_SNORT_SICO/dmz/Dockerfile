@@ -12,7 +12,7 @@ RUN chmod 640 /root/.ssh/authorized_keys
 COPY ./banner /etc/ssh/
 COPY ./sshd /etc/pam.d/
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-EXPOSE 22
+
 COPY ./start.sh .
 RUN chmod +x start.sh
 # HTTPS Config

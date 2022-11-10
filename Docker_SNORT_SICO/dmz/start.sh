@@ -11,7 +11,7 @@ service rsyslog start
 service fail2ban start
 
 #Redireccionamos el puerto 22 al 2222
-iptables -t nat -A PREROUTING -p tcp --dport 22 -j REDIRECT --to-port 2222
+iptables -t nat -A PREROUTING -p tcp --dport 22 -j REDIRECT --to-port 2222 
 
 /usr/sbin/sshd -D
 

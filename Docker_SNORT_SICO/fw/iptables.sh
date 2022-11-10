@@ -11,7 +11,7 @@ iptables -P FORWARD ACCEPT
 iptables -P OUTPUT ACCEPT
  
 #Acceso al puerto 22 de la maquina dmz1 desde la red externa
-iptables -A INPUT -p tcp -i eth1 -o eth0 --dport 22 -j ACCEPT
+iptables -A FORWARD -p tcp -i eth1 -s 10.5.0.20 -o eth0 -d 10.5.1.20 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
 
 # Acceso al puerto 22 de la maquina dmz1 desde la red externa.
 #iptables -t nat -A PREROUTING -p tcp - --dport 22 -j DNAT --to 10.5.1.20:2222
