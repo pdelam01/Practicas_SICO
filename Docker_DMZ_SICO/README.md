@@ -48,6 +48,33 @@ Para HTTPS encontramos:
 - Configuración de un certificado autofirmado
 - Fichero index.html de bienvenida
 
+## Ejecución
+### Implementación de Google Authenticator
+En el contenedor dmz, dentro del usuario user1 hemos de correr el comando:
+```
+google-authenticator
+```
+Y escanear el código qr proporcionado.
+
+### Fail2ban
+Por defecto el servicio fail2ban no está activado. Para ello:
+```
+sudo service fail2ban start
+```
+Y comprobamos que todo ha ido bien con:
+```
+sudo service fail2ban status
+```
+
+### Acceso SSH clave pública
+Desde el cliente haremos:
+```
+ssh-keygen
+ssh-copy-id -i ~/.ssh/id_rsa.pub -p 2222 user1@10.5.1.20
+ssh user1@10.5.1.20 -p 2222 
+```
+Y ya podremos acceder sin contraseña.
+
 ## Salida comandos ip route e ip address
 ### Internal 1 & 2
 ```
