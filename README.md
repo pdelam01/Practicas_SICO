@@ -16,5 +16,5 @@ cualquier parte de Internet.
 - Como máquina víctima se usará int1, de la red interna.
 
 ### Honeypot - Cowrie
-Inatalación y configuración del honeypot Cowrie. Esta se realizará en la máquina
+Instalación y configuración del honeypot Cowrie. Esta se realizará en la máquina
 dmz1 ya que simula un servicio que una organización podría tener expuesto.
